@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GameVault | Welcome</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="navbar">
+        <a class="logo" href="index.html">GameVault</a>
+
+        <div class="nav-links">
+            <a class="active" href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="about.html">About</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="welcome-section">
+        <div class="welcome-content">
+            <p class="section-label">Organise your gaming collection</p>
+
+            <h1>Welcome to GameVault</h1>
+
+            <p class="welcome-text">
+                GameVault is a video-game collection management application
+                that allows users to organise, track and maintain their favourite
+                games in one place. Users can create collections, add games with
+                useful information, and update or remove games whenever necessary.
+            </p>
+
+            <div class="welcome-buttons">
+                <a class="button primary-button" href="dashboard.html">
+                    View collection
+                </a>
+
+                <a class="button secondary-button" href="about.html">
+                    Learn more
+                </a>
+            </div>
+        </div>
+
+        <div class="welcome-image-container">
+            <img
+                    src="images/gaming-collection.jpg"
+                    alt="A collection of video games"
+                    class="welcome-image"
+            >
+        </div>
+    </section>
+
+    <section class="statistics-section">
+        <div class="section-heading">
+            <p class="section-label">Live collection overview</p>
+
+            <h2>Top games right now</h2>
+
+            <p>
+                The following games are currently the most popular games in the
+                collection based on their current Steam player counts.
+            </p>
+        </div>
+
+        <div class="game-statistics-grid" id="top-games">
+            <!-- The JavaScript file inserts the top three game cards here. -->
+        </div>
+
+        <p class="last-updated">
+            Player counts are example values for the current homepage prototype.
+        </p>
+    </section>
+
+    <section class="feature-section">
+        <div class="feature-image-container">
+            <img
+                    src="images/game-items.jpg"
+                    alt="Video games organised in a personal collection"
+                    class="feature-image"
+            >
+        </div>
+
+        <div class="feature-content">
+            <p class="section-label">Simple and organised</p>
+
+            <h2>Manage your games with ease</h2>
+
+            <p>
+                Add games to your collection and save information such as genre,
+                platform, release date, rating and player count. GameVault keeps
+                your gaming information organised and easy to access.
+            </p>
+
+            <a class="button primary-button" href="dashboard.html">
+                Open dashboard
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <p>&copy; 2026 GameVault. Created for an assignment.</p>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
