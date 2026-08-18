@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GameVault | Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="navbar">
+        <a class="logo" href="index.html">GameVault</a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a class="active" href="dashboard.html">Dashboard</a>
+            <a href="about.html">About</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+</header>
+
+<main class="dashboard-page">
+    <section class="dashboard-header">
+        <p class="section-label">Your gaming library</p>
+
+        <h1>Game Collections</h1>
+
+        <p>
+            View, organise and manage all of your video-game collections.
+        </p>
+    </section>
+
+    <section class="collections-section">
+        <div class="collections-heading">
+            <div>
+                <p class="section-label">Saved collections</p>
+                <h2>Your collections</h2>
+            </div>
+
+            <p id="collection-total" class="collection-total">
+                0 collections
+            </p>
+        </div>
+
+        <div class="collection-grid" id="collection-list">
+            <!-- Collection cards are inserted by dashboard.js -->
+        </div>
+    </section>
+
+    <section class="add-collection-section">
+        <h2>Add a new collection</h2>
+
+        <form id="collection-form" class="collection-form">
+            <div class="form-group">
+                <label for="collection-title">Collection title</label>
+
+                <input
+                        type="text"
+                        id="collection-title"
+                        name="collection-title"
+                        placeholder="For example: Racing Games"
+                        required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="collection-description">
+                    Collection description
+                </label>
+
+                <textarea
+                        id="collection-description"
+                        name="collection-description"
+                        placeholder="Describe this collection"
+                        rows="4"
+                ></textarea>
+            </div>
+
+            <button class="button primary-button" type="submit">
+                Add collection
+            </button>
+        </form>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <p>&copy; 2026 GameVault. Created for an academic assignment.</p>
+</footer>
+
+<script src="js/dashboard.js"></script>
+</body>
+</html>
