@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GameVault | Collection Details</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="navbar">
+        <a class="logo" href="index.html">GameVault</a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="about.html">About</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+</header>
+
+<main class="details-page">
+    <section class="details-header">
+        <a class="back-link" href="dashboard.html">
+            ← Back to dashboard
+        </a>
+
+        <p class="section-label">Collection details</p>
+
+        <h1 id="collection-title">Competitive Games</h1>
+
+        <p id="collection-description">
+            Games focused on online competitive play.
+        </p>
+    </section>
+
+    <section class="items-section">
+        <div class="items-heading">
+            <div>
+                <p class="section-label">Games in collection</p>
+                <h2>Your games</h2>
+            </div>
+
+            <p id="game-total" class="collection-total">0 games</p>
+        </div>
+
+        <div class="game-items-grid" id="game-list">
+            <!-- JavaScript inserts game cards here -->
+        </div>
+    </section>
+
+    <section class="add-game-section">
+        <h2>Add a game</h2>
+
+        <form id="game-form" class="collection-form">
+            <div class="form-group">
+                <label for="game-title">Game title</label>
+
+                <input
+                        type="text"
+                        id="game-title"
+                        placeholder="For example: Counter-Strike 2"
+                        required
+                >
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="game-genre">Genre</label>
+
+                    <input
+                            type="text"
+                            id="game-genre"
+                            placeholder="For example: FPS"
+                            required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="game-platform">Platform</label>
+
+                    <input
+                            type="text"
+                            id="game-platform"
+                            placeholder="For example: PC"
+                            required
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="game-rating">Your rating out of 10</label>
+
+                <input
+                        type="number"
+                        id="game-rating"
+                        min="1"
+                        max="10"
+                        placeholder="For example: 9"
+                        required
+                >
+            </div>
+
+            <button class="button primary-button" type="submit">
+                Add game
+            </button>
+        </form>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <p>&copy; 2026 GameVault. Created for an academic assignment.</p>
+</footer>
+
+<script src="js/collection-details.js"></script>
+</body>
+</html>
