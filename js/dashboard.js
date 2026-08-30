@@ -27,6 +27,7 @@ const defaultCollections = [
 
 let collections = loadCollections();
 let selectedCollectionImage = defaultCollectionImage;
+let collectionBeingEdited = null;
 
 function loadCollections() {
     const savedCollections = localStorage.getItem(storageKey);
@@ -90,6 +91,14 @@ function displayCollections() {
                         </a>
 
                         <button
+                            class="edit-image-button"
+                            type="button"
+                            data-collection-id="${collection.id}"
+                        >
+                            Change image
+                        </button>
+
+                        <button
                             class="delete-button"
                             type="button"
                             data-collection-id="${collection.id}"
@@ -102,11 +111,12 @@ function displayCollections() {
         })
         .join("");
 
-    addDeleteListeners();
+    addCollectionActionListeners();
 }
 
-function addDeleteListeners() {
+function addCollectionActionListeners() {
     const deleteButtons = document.querySelectorAll(".delete-button");
+    const editImageButtons = document.querySelectorAll(".edit-image-button");
 
     deleteButtons.forEach((button) => {
         button.addEventListener("click", () => {
@@ -122,6 +132,15 @@ function addDeleteListeners() {
                 saveCollections();
                 displayCollections();
             }
+        });
+    });
+
+    editImageButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            collectionBeingEdited = Number(button.dataset.collectionId);
+
+            const imageInput = document.querySelector("#change-image-input");
+            imageInput.click();
         });
     });
 }
@@ -141,6 +160,36 @@ function previewCollectionImage(event) {
     fileReader.addEventListener("load", () => {
         selectedCollectionImage = fileReader.result;
         imagePreview.src = selectedCollectionImage;
+    });
+
+    fileReader.readAsDataURL(imageFile);
+}
+
+function changeCollectionImage(event) {
+    const imageFile = event.target.files[0];
+
+    if (!imageFile || collectionBeingEdited === null) {
+        return;
+    }
+
+    const fileReader = new FileReader();
+
+    fileReader.addEventListener("load", () => {
+        const collection = collections.find((currentCollection) => {
+            return currentCollection.id === collectionBeingEdited;
+        });
+
+        if (!collection) {
+            return;
+        }
+
+        collection.image = fileReader.result;
+
+        saveCollections();
+        displayCollections();
+
+        collectionBeingEdited = null;
+        event.target.value = "";
     });
 
     fileReader.readAsDataURL(imageFile);
@@ -180,8 +229,10 @@ function addCollection(event) {
 
 const collectionForm = document.querySelector("#collection-form");
 const collectionImageInput = document.querySelector("#collection-image");
+const changeImageInput = document.querySelector("#change-image-input");
 
 collectionForm.addEventListener("submit", addCollection);
 collectionImageInput.addEventListener("change", previewCollectionImage);
+changeImageInput.addEventListener("change", changeCollectionImage);
 
 displayCollections();

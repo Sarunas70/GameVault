@@ -849,3 +849,22 @@ h2 {
     object-fit: cover;
     width: 100%;
 }
+
+.edit-image-button {
+    background: var(--light-blue);
+    border: 1px solid var(--primary-colour);
+    border-radius: 0.4rem;
+    color: var(--primary-colour);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.55rem 0.8rem;
+}
+
+.edit-image-button:hover {
+    background: #bfdbfe;
+}
+
+.collection-card-actions {
+    flex-wrap: wrap;
+}
