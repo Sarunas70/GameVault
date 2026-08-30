@@ -1033,3 +1033,64 @@ h2 {
         height: 200px;
     }
 }
+
+.authentication-page {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: calc(100vh - 145px);
+    padding: 4rem 1.5rem;
+}
+
+.authentication-card {
+    background: var(--white);
+    border: 1px solid var(--border-colour);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow);
+    max-width: 520px;
+    padding: 2.5rem;
+    width: 100%;
+}
+
+.authentication-card h1 {
+    font-size: 2.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.authentication-intro {
+    color: var(--muted-text);
+    margin-bottom: 2rem;
+}
+
+.authentication-switch {
+    color: var(--muted-text);
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.authentication-switch a {
+    color: var(--primary-colour);
+    font-weight: 700;
+}
+
+.authentication-switch a:hover {
+    text-decoration: underline;
+}
+
+.form-message {
+    display: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.form-message:not(:empty) {
+    display: block;
+}
+
+.error-message {
+    color: #b91c1c;
+}
+
+.success-message {
+    color: #15803d;
+}

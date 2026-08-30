@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GameVault | Sign Up</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="navbar">
+        <a class="logo" href="index.html">GameVault</a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="about.html">About</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+</header>
+
+<main class="authentication-page">
+    <section class="authentication-card">
+        <p class="section-label">Create an account</p>
+
+        <h1>Join GameVault</h1>
+
+        <p class="authentication-intro">
+            Create an account to create and manage your own game collections.
+        </p>
+
+        <form id="signup-form" class="collection-form">
+            <div class="form-group">
+                <label for="signup-name">Display name</label>
+
+                <input
+                        type="text"
+                        id="signup-name"
+                        placeholder="Your name"
+                        required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="signup-email">Email address</label>
+
+                <input
+                        type="email"
+                        id="signup-email"
+                        placeholder="you@example.com"
+                        required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="signup-password">Password</label>
+
+                <input
+                        type="password"
+                        id="signup-password"
+                        placeholder="Minimum 6 characters"
+                        minlength="6"
+                        required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="signup-confirm-password">
+                    Confirm password
+                </label>
+
+                <input
+                        type="password"
+                        id="signup-confirm-password"
+                        placeholder="Enter your password again"
+                        minlength="6"
+                        required
+                >
+            </div>
+
+            <p id="signup-message" class="form-message"></p>
+
+            <button class="button primary-button" type="submit">
+                Create account
+            </button>
+        </form>
+
+        <p class="authentication-switch">
+            Already have an account?
+            <a href="login.html">Log in</a>
+        </p>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <p>&copy; 2026 GameVault. Created for an academic assignment.</p>
+</footer>
+
+<script src="js/auth.js"></script>
+</body>
+</html>
