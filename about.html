@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GameVault | About</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="navbar">
+        <a class="logo" href="index.html">GameVault</a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a class="active" href="about.html">About</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+</header>
+
+<main class="about-page">
+    <section class="about-header">
+        <p class="section-label">About GameVault</p>
+
+        <h1>A better way to organise your games</h1>
+
+        <p>
+            GameVault is a video-game collection management application.
+            It helps users create collections, save game details, track
+            ratings and organise their favourite games in one place.
+        </p>
+    </section>
+
+    <section class="about-content-section">
+        <article class="about-card">
+            <h2>About the application</h2>
+
+            <p>
+                GameVault was created as a collection-management web
+                application for video games. Users can create categories
+                such as Competitive Games, Racing Games or Open-World Games,
+                then add individual games with their genre, platform and rating.
+            </p>
+
+            <p>
+                The application also provides an overview of popular games
+                through player-count information on the welcome page.
+            </p>
+        </article>
+
+        <article class="about-card">
+            <h2>Contact information</h2>
+
+            <dl class="contact-list">
+                <div>
+                    <dt>Student</dt>
+                    <dd>Sarunas Vaicikonis</dd>
+                </div>
+
+                <div>
+                    <dt>Email</dt>
+                    <dd>
+                        <a href="20106825@setu.ie">
+                            20106825@setu.ie
+                        </a>
+                    </dd>
+                </div>
+
+                <div>
+                    <dt>Location</dt>
+                    <dd>Waterford, Ireland</dd>
+                </div>
+            </dl>
+        </article>
+    </section>
+
+
+    <section class="app-statistics-section">
+        <div class="section-heading">
+            <p class="section-label">GameVault overview</p>
+
+            <h2>Application statistics</h2>
+
+            <p>
+                A summary of the users, collections and games currently
+                stored in the GameVault application.
+            </p>
+        </div>
+
+        <div class="app-statistics-grid">
+            <article class="app-stat-card">
+                <span class="app-stat-number" id="total-users">1</span>
+                <span class="app-stat-label">Registered users</span>
+            </article>
+
+            <article class="app-stat-card">
+                <span class="app-stat-number" id="total-collections">0</span>
+                <span class="app-stat-label">Game collections</span>
+            </article>
+
+            <article class="app-stat-card">
+                <span class="app-stat-number" id="total-games">0</span>
+                <span class="app-stat-label">Games stored</span>
+            </article>
+
+            <article class="app-stat-card">
+                <span class="app-stat-number" id="average-games">0</span>
+                <span class="app-stat-label">Average games per collection</span>
+            </article>
+        </div>
+
+        <div class="collection-statistics">
+            <article class="collection-stat-card">
+                <p class="collection-type">Largest collection</p>
+                <h3 id="largest-collection">Loading...</h3>
+                <p id="largest-collection-info">Loading collection data...</p>
+            </article>
+
+            <article class="collection-stat-card">
+                <p class="collection-type">Smallest collection</p>
+                <h3 id="smallest-collection">Loading...</h3>
+                <p id="smallest-collection-info">Loading collection data...</p>
+            </article>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <p>2026 GameVault. Created for an academic assignment.</p>
+</footer>
+
+<script src="js/about.js"></script>
+</body>
+</html>
