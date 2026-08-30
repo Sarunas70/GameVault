@@ -868,3 +868,168 @@ h2 {
 .collection-card-actions {
     flex-wrap: wrap;
 }
+
+/* Dashboard search and sorting controls */
+
+.collection-controls {
+    align-items: end;
+    background: var(--white);
+    border: 1px solid var(--border-colour);
+    border-radius: 0.75rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 2fr 1fr;
+    margin-bottom: 1.5rem;
+    padding: 1.25rem;
+}
+
+.search-group,
+.sort-group {
+    display: grid;
+    gap: 0.4rem;
+}
+
+.search-group label,
+.sort-group label {
+    color: var(--text-colour);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.search-group input,
+.sort-group select {
+    background: var(--white);
+    border: 1px solid var(--border-colour);
+    border-radius: 0.4rem;
+    color: var(--text-colour);
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 0.75rem;
+    width: 100%;
+}
+
+.search-group input:focus,
+.sort-group select:focus {
+    border-color: var(--primary-colour);
+    outline: 2px solid var(--light-blue);
+}
+
+/* Dashboard collection card image */
+
+.collection-card-image {
+    display: block;
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
+}
+
+/* Image upload preview */
+
+.file-help-text {
+    color: var(--muted-text);
+    font-size: 0.82rem;
+    margin-top: 0.2rem;
+}
+
+.image-preview-container {
+    background: var(--page-background);
+    border: 1px dashed var(--border-colour);
+    border-radius: 0.6rem;
+    overflow: hidden;
+    width: 100%;
+}
+
+.collection-image-preview {
+    display: block;
+    height: 220px;
+    object-fit: cover;
+    width: 100%;
+}
+
+/* Buttons at the bottom of each collection card */
+
+.collection-card-actions {
+    align-items: center;
+    border-top: 1px solid var(--border-colour);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+}
+
+.small-button {
+    background: var(--primary-colour);
+    color: var(--white);
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
+}
+
+.small-button:hover {
+    background: var(--primary-dark);
+}
+
+.edit-image-button {
+    background: var(--light-blue);
+    border: 1px solid var(--primary-colour);
+    border-radius: 0.4rem;
+    color: var(--primary-colour);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.55rem 0.8rem;
+}
+
+.edit-image-button:hover {
+    background: #bfdbfe;
+}
+
+.delete-button {
+    background: transparent;
+    border: 1px solid #dc2626;
+    border-radius: 0.4rem;
+    color: #dc2626;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.55rem 0.8rem;
+}
+
+.delete-button:hover {
+    background: #fee2e2;
+}
+
+/* Search result / empty collection message */
+
+.empty-message {
+    color: var(--muted-text);
+    grid-column: 1 / -1;
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Mobile layout */
+
+@media (max-width: 700px) {
+    .collection-controls {
+        grid-template-columns: 1fr;
+    }
+
+    .collection-card-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .small-button,
+    .edit-image-button,
+    .delete-button {
+        text-align: center;
+        width: 100%;
+    }
+
+    .collection-card-image {
+        height: 200px;
+    }
+}
