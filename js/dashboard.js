@@ -28,6 +28,8 @@ const defaultCollections = [
 let collections = loadCollections();
 let selectedCollectionImage = defaultCollectionImage;
 let collectionBeingEdited = null;
+let searchTerm = "";
+let sortOption = "default";
 
 function loadCollections() {
     const savedCollections = localStorage.getItem(storageKey);
@@ -43,6 +45,37 @@ function saveCollections() {
     localStorage.setItem(storageKey, JSON.stringify(collections));
 }
 
+function getVisibleCollections() {
+    const filteredCollections = collections.filter((collection) => {
+        const searchableText = `
+            ${collection.title}
+            ${collection.description}
+        `.toLowerCase();
+
+        return searchableText.includes(searchTerm.toLowerCase());
+    });
+
+    return [...filteredCollections].sort((firstCollection, secondCollection) => {
+        if (sortOption === "title-ascending") {
+            return firstCollection.title.localeCompare(secondCollection.title);
+        }
+
+        if (sortOption === "title-descending") {
+            return secondCollection.title.localeCompare(firstCollection.title);
+        }
+
+        if (sortOption === "most-games") {
+            return secondCollection.totalGames - firstCollection.totalGames;
+        }
+
+        if (sortOption === "least-games") {
+            return firstCollection.totalGames - secondCollection.totalGames;
+        }
+
+        return 0;
+    });
+}
+
 function displayCollections() {
     const collectionList = document.querySelector("#collection-list");
     const collectionTotal = document.querySelector("#collection-total");
@@ -50,17 +83,23 @@ function displayCollections() {
     collectionTotal.textContent =
         `${collections.length} collection${collections.length === 1 ? "" : "s"}`;
 
-    if (collections.length === 0) {
+    const visibleCollections = getVisibleCollections();
+
+    if (visibleCollections.length === 0) {
+        const emptyMessage = collections.length === 0
+            ? "You have not created any collections yet."
+            : "No collections match your search.";
+
         collectionList.innerHTML = `
             <p class="empty-message">
-                You have not created any collections yet.
+                ${emptyMessage}
             </p>
         `;
 
         return;
     }
 
-    collectionList.innerHTML = collections
+    collectionList.innerHTML = visibleCollections
         .map((collection) => {
             return `
                 <article class="collection-card">
@@ -230,9 +269,21 @@ function addCollection(event) {
 const collectionForm = document.querySelector("#collection-form");
 const collectionImageInput = document.querySelector("#collection-image");
 const changeImageInput = document.querySelector("#change-image-input");
+const searchInput = document.querySelector("#collection-search");
+const sortSelect = document.querySelector("#collection-sort");
 
 collectionForm.addEventListener("submit", addCollection);
 collectionImageInput.addEventListener("change", previewCollectionImage);
 changeImageInput.addEventListener("change", changeCollectionImage);
+
+searchInput.addEventListener("input", (event) => {
+    searchTerm = event.target.value.trim();
+    displayCollections();
+});
+
+sortSelect.addEventListener("change", (event) => {
+    sortOption = event.target.value;
+    displayCollections();
+});
 
 displayCollections();

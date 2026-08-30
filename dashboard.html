@@ -35,6 +35,29 @@
     </section>
 
     <section class="collections-section">
+        <div class="collection-controls">
+            <div class="search-group">
+                <label for="collection-search">Search collections</label>
+
+                <input
+                        type="search"
+                        id="collection-search"
+                        placeholder="Search by collection title..."
+                >
+            </div>
+
+            <div class="sort-group">
+                <label for="collection-sort">Sort collections</label>
+
+                <select id="collection-sort">
+                    <option value="default">Default order</option>
+                    <option value="title-ascending">Title: A to Z</option>
+                    <option value="title-descending">Title: Z to A</option>
+                    <option value="most-games">Most games first</option>
+                    <option value="least-games">Least games first</option>
+                </select>
+            </div>
+        </div>
         <div class="collections-heading">
             <div>
                 <p class="section-label">Saved collections</p>
@@ -47,7 +70,7 @@
         </div>
 
         <div class="collection-grid" id="collection-list">
-            <!-- Collection cards are inserted by dashboard.js -->
+
         </div>
     </section>
 
