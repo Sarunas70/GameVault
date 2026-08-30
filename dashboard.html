@@ -80,6 +80,32 @@
                 ></textarea>
             </div>
 
+            <div class="form-group">
+                <label for="collection-image">
+                    Collection image
+                </label>
+
+                <input
+                        type="file"
+                        id="collection-image"
+                        name="collection-image"
+                        accept="image/png, image/jpeg, image/webp"
+                >
+
+                <p class="file-help-text">
+                    Optional: choose a PNG, JPG, JPEG or WEBP image.
+                </p>
+            </div>
+
+            <div class="image-preview-container">
+                <img
+                        id="collection-image-preview"
+                        src="images/default-collection.jpg"
+                        alt="Preview of selected collection image"
+                        class="collection-image-preview"
+                >
+            </div>
+
             <button class="button primary-button" type="submit">
                 Add collection
             </button>
@@ -88,7 +114,7 @@
 </main>
 
 <footer class="site-footer">
-    <p>&copy; 2026 GameVault. Created for an academic assignment.</p>
+    <p>2026 GameVault. Created for an academic assignment.</p>
 </footer>
 
 <script src="js/dashboard.js"></script>

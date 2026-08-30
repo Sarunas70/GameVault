@@ -822,3 +822,30 @@ h2 {
         grid-template-columns: 1fr;
     }
 }
+.collection-card-image {
+    display: block;
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.file-help-text {
+    color: var(--muted-text);
+    font-size: 0.82rem;
+    margin-top: 0.2rem;
+}
+
+.image-preview-container {
+    background: var(--page-background);
+    border: 1px dashed var(--border-colour);
+    border-radius: 0.6rem;
+    overflow: hidden;
+    width: 100%;
+}
+
+.collection-image-preview {
+    display: block;
+    height: 220px;
+    object-fit: cover;
+    width: 100%;
+}
