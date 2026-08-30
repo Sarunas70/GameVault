@@ -1,6 +1,7 @@
 const defaultCollectionImage = "images/default-collection.jpg";
+const storageKey = "gameVaultCollections";
 
-const collections = [
+const defaultCollections = [
     {
         id: 1,
         title: "Competitive Games",
@@ -24,7 +25,22 @@ const collections = [
     }
 ];
 
+let collections = loadCollections();
 let selectedCollectionImage = defaultCollectionImage;
+
+function loadCollections() {
+    const savedCollections = localStorage.getItem(storageKey);
+
+    if (!savedCollections) {
+        return defaultCollections;
+    }
+
+    return JSON.parse(savedCollections);
+}
+
+function saveCollections() {
+    localStorage.setItem(storageKey, JSON.stringify(collections));
+}
 
 function displayCollections() {
     const collectionList = document.querySelector("#collection-list");
@@ -48,7 +64,7 @@ function displayCollections() {
             return `
                 <article class="collection-card">
                     <img
-                        src="${collection.image}"
+                        src="${collection.image || defaultCollectionImage}"
                         alt="${collection.title} collection image"
                         class="collection-card-image"
                     >
@@ -102,6 +118,8 @@ function addDeleteListeners() {
 
             if (collectionIndex !== -1) {
                 collections.splice(collectionIndex, 1);
+
+                saveCollections();
                 displayCollections();
             }
         });
@@ -149,6 +167,8 @@ function addCollection(event) {
         totalGames: 0,
         image: selectedCollectionImage
     });
+
+    saveCollections();
 
     event.target.reset();
 
