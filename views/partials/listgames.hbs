@@ -1,0 +1,21 @@
+{{#if games.length}}
+    <div class="game-items-grid">
+        {{#each games}}
+            <article class="game-card">
+                <div class="game-card-content">
+                    <p class="collection-type">{{genre}}</p>
+
+                    <h3>{{title}}</h3>
+
+                    <p>Platform: {{platform}}</p>
+
+                    <p>Rating: {{rating}}/10</p>
+                </div>
+            </article>
+        {{/each}}
+    </div>
+{{else}}
+    <p class="empty-message">
+        No games have been added to this collection yet.
+    </p>
+{{/if}}

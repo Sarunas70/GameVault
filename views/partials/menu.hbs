@@ -1,0 +1,20 @@
+<header class="site-header">
+    <nav class="navbar">
+        <a class="logo" href="/">GameVault</a>
+
+        <div class="nav-links">
+            <a id="home" href="/">Home</a>
+            <a id="dashboard" href="/dashboard">Dashboard</a>
+            <a id="about" href="/about">About</a>
+            <a id="login" href="/login">Login</a>
+        </div>
+    </nav>
+</header>
+
+<script>
+    const activeLink = document.querySelector("#{{id}}");
+
+    if (activeLink) {
+        activeLink.classList.add("active");
+    }
+</script>

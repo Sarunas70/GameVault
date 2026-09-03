@@ -1,0 +1,160 @@
+{{> menu id="dashboard"}}
+<link rel="stylesheet" href="/style.css">
+<main class="dashboard-page">
+    <section class="dashboard-header">
+        <p class="section-label">Your gaming library</p>
+
+        <h1>Game Collections</h1>
+
+        <p>
+            View, organise, and manage all of your video-game collections.
+        </p>
+    </section>
+
+    <section class="collections-section">
+        <div class="collection-controls">
+            <div class="search-group">
+                <label for="collection-search">Search collections</label>
+
+                <input
+                        type="search"
+                        id="collection-search"
+                        placeholder="Search by collection title..."
+                >
+            </div>
+
+            <div class="sort-group">
+                <label for="collection-sort">Sort collections</label>
+
+                <select id="collection-sort">
+                    <option value="default">Default order</option>
+                    <option value="title-ascending">Title: A to Z</option>
+                    <option value="title-descending">Title: Z to A</option>
+                    <option value="most-games">Most games first</option>
+                    <option value="least-games">Least games first</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="collections-heading">
+            <div>
+                <p class="section-label">Saved collections</p>
+
+                <h2>Your collections</h2>
+            </div>
+
+            <p id="collection-total" class="collection-total">
+                {{collections.length}} collections
+            </p>
+        </div>
+
+        <div class="collection-grid" id="collection-list">
+            {{#each collections}}
+                <article class="collection-card">
+                    <img
+                            src="{{image}}"
+                            alt="{{title}} collection image"
+                            class="collection-card-image"
+                    >
+
+                    <div class="collection-card-content">
+                        <p class="collection-type">Game collection</p>
+
+                        <h3>{{title}}</h3>
+
+                        <p>{{description}}</p>
+
+                        <p class="game-total">
+                            {{totalGames}} games
+                        </p>
+                    </div>
+
+                    <div class="collection-card-actions">
+                        <a
+                                class="button small-button"
+                                href="/collection/{{id}}"
+                        >
+                            Open collection
+                        </a>
+                    </div>
+                </article>
+            {{else}}
+                <p class="empty-message">
+                    You have not created any collections yet.
+                </p>
+            {{/each}}
+        </div>
+    </section>
+
+    <section class="add-collection-section">
+        <h2>Add a new collection</h2>
+
+        <form id="collection-form" class="collection-form">
+            <div class="form-group">
+                <label for="collection-title">Collection title</label>
+
+                <input
+                        type="text"
+                        id="collection-title"
+                        name="collection-title"
+                        placeholder="For example: Racing Games"
+                        required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="collection-description">
+                    Collection description
+                </label>
+
+                <textarea
+                        id="collection-description"
+                        name="collection-description"
+                        placeholder="Describe this collection"
+                        rows="4"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="collection-image">
+                    Collection image
+                </label>
+
+                <input
+                        type="file"
+                        id="collection-image"
+                        name="collection-image"
+                        accept="image/png, image/jpeg, image/webp"
+                >
+
+                <p class="file-help-text">
+                    Optional: choose a PNG, JPG, JPEG, or WEBP image.
+                </p>
+            </div>
+
+            <div class="image-preview-container">
+                <img
+                        id="collection-image-preview"
+                        src="/images/default-collection.jpg"
+                        alt="Preview of selected collection image"
+                        class="collection-image-preview"
+                >
+            </div>
+
+            <button class="button primary-button" type="submit">
+                Add collection
+            </button>
+        </form>
+    </section>
+
+    <input
+            type="file"
+            id="change-image-input"
+            accept="image/png, image/jpeg, image/webp"
+            hidden
+    >
+</main>
+
+<footer class="site-footer">
+    <p>&copy; 2026 GameVault. Created for an academic assignment.</p>
+</footer>

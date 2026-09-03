@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GameVault | Login</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="navbar">
+        <a class="logo" href="index.html">GameVault</a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="about.html">About</a>
+            <a class="active" href="login.html">Login</a>
+        </div>
+    </nav>
+</header>
+
+<main class="authentication-page">
+    <section class="authentication-card">
+        <p class="section-label">GameVault account</p>
+
+        <h1>Welcome back</h1>
+
+        <p class="authentication-intro">
+            Log in to manage your own video-game collections.
+        </p>
+
+        <form id="login-form" class="collection-form">
+            <div class="form-group">
+                <label for="login-email">Email address</label>
+
+                <input
+                        type="email"
+                        id="login-email"
+                        placeholder="you@example.com"
+                        required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="login-password">Password</label>
+
+                <input
+                        type="password"
+                        id="login-password"
+                        placeholder="Enter your password"
+                        required
+                >
+            </div>
+
+            <p id="login-message" class="form-message"></p>
+
+            <button class="button primary-button" type="submit">
+                Log in
+            </button>
+        </form>
+
+        <p class="authentication-switch">
+            Do not have an account?
+            <a href="signup.html">Create an account</a>
+        </p>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <p>&copy; 2026 GameVault. Created for an academic assignment.</p>
+</footer>
+
+<script src="js/auth.js"></script>
+</body>
+</html>
