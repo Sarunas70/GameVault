@@ -3,25 +3,26 @@ const storageKey = "gameVaultCollections";
 
 const defaultCollections = [
     {
-        id: 1,
+        id: "competitive-games",
         title: "Competitive Games",
         description: "Games focused on online competitive play.",
-        totalGames: 3,
-        image: defaultCollectionImage
+        totalGames: 1,
+        image: "/images/competitive-games.jpg"
     },
     {
-        id: 2,
-        title: "Racing Games",
-        description: "Driving and racing games.",
-        totalGames: 2,
-        image: defaultCollectionImage
+        id: "story-games",
+        title: "Story Games",
+        description:
+            "Narrative-focused games with memorable characters and worlds.",
+        totalGames: 0,
+        image: "/images/story-games.jpg"
     },
     {
-        id: 3,
-        title: "Open-World Games",
-        description: "Games with large worlds to explore.",
-        totalGames: 4,
-        image: defaultCollectionImage
+        id: "casual-games",
+        title: "Casual Games",
+        description: "Relaxing games for short, enjoyable play sessions.",
+        totalGames: 0,
+        image: "/images/casual-games.jpg"
     }
 ];
 
@@ -124,7 +125,7 @@ function displayCollections() {
                     <div class="collection-card-actions">
                         <a
                             class="button small-button"
-                            href="/collection-details?id=${collection.id}"
+                            href="/collection/${collection.id}"
                         >
                             Open collection
                         </a>
@@ -159,26 +160,29 @@ function addCollectionActionListeners() {
 
     deleteButtons.forEach((button) => {
         button.addEventListener("click", () => {
-            const collectionId = Number(button.dataset.collectionId);
+            const collectionId = button.dataset.collectionId;
 
             const collectionIndex = collections.findIndex((collection) => {
                 return collection.id === collectionId;
             });
 
-            if (collectionIndex !== -1) {
-                collections.splice(collectionIndex, 1);
-
-                saveCollections();
-                displayCollections();
+            if (collectionIndex === -1) {
+                return;
             }
+
+            collections.splice(collectionIndex, 1);
+
+            saveCollections();
+            displayCollections();
         });
     });
 
     editImageButtons.forEach((button) => {
         button.addEventListener("click", () => {
-            collectionBeingEdited = Number(button.dataset.collectionId);
+            collectionBeingEdited = button.dataset.collectionId;
 
             const imageInput = document.querySelector("#change-image-input");
+
             imageInput.click();
         });
     });
@@ -191,6 +195,7 @@ function previewCollectionImage(event) {
     if (!imageFile) {
         selectedCollectionImage = defaultCollectionImage;
         imagePreview.src = defaultCollectionImage;
+
         return;
     }
 
@@ -234,6 +239,16 @@ function changeCollectionImage(event) {
     fileReader.readAsDataURL(imageFile);
 }
 
+function createCollectionId(title) {
+    const titleId = title
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+
+    return `${titleId}-${Date.now()}`;
+}
+
 function addCollection(event) {
     event.preventDefault();
 
@@ -249,8 +264,8 @@ function addCollection(event) {
     }
 
     collections.push({
-        id: Date.now(),
-        title: title,
+        id: createCollectionId(title),
+        title,
         description: description || "No description provided.",
         totalGames: 0,
         image: selectedCollectionImage
@@ -272,18 +287,30 @@ const changeImageInput = document.querySelector("#change-image-input");
 const searchInput = document.querySelector("#collection-search");
 const sortSelect = document.querySelector("#collection-sort");
 
-collectionForm.addEventListener("submit", addCollection);
-collectionImageInput.addEventListener("change", previewCollectionImage);
-changeImageInput.addEventListener("change", changeCollectionImage);
+if (collectionForm) {
+    collectionForm.addEventListener("submit", addCollection);
+}
 
-searchInput.addEventListener("input", (event) => {
-    searchTerm = event.target.value.trim();
-    displayCollections();
-});
+if (collectionImageInput) {
+    collectionImageInput.addEventListener("change", previewCollectionImage);
+}
 
-sortSelect.addEventListener("change", (event) => {
-    sortOption = event.target.value;
-    displayCollections();
-});
+if (changeImageInput) {
+    changeImageInput.addEventListener("change", changeCollectionImage);
+}
+
+if (searchInput) {
+    searchInput.addEventListener("input", (event) => {
+        searchTerm = event.target.value.trim();
+        displayCollections();
+    });
+}
+
+if (sortSelect) {
+    sortSelect.addEventListener("change", (event) => {
+        sortOption = event.target.value;
+        displayCollections();
+    });
+}
 
 displayCollections();

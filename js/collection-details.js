@@ -1,30 +1,56 @@
-const games = [
-    {
-        id: 1,
-        title: "Counter-Strike 2",
-        genre: "First-person shooter",
-        platform: "PC",
-        rating: 9
-    },
-    {
-        id: 2,
-        title: "Dota 2",
-        genre: "Multiplayer online battle arena",
-        platform: "PC",
-        rating: 8
-    },
-    {
-        id: 3,
-        title: "Apex Legends",
-        genre: "Battle royale shooter",
-        platform: "PC, Xbox, PlayStation",
-        rating: 8
-    }
-];
+const storageKey = "gameVaultCollections";
+
+const gameStorageKey = "gameVaultGames";
+
+const urlParameters = new URLSearchParams(window.location.search);
+const collectionId = Number(urlParameters.get("id"));
+
+const collections = JSON.parse(
+    localStorage.getItem(storageKey) || "[]"
+);
+
+const gamesByCollection = JSON.parse(
+    localStorage.getItem(gameStorageKey) || "{}"
+);
+
+const collection = collections.find((currentCollection) => {
+    return currentCollection.id === collectionId;
+});
+
+const collectionTitle = document.querySelector("#collection-title");
+const collectionDescription = document.querySelector("#collection-description");
+const gameTotal = document.querySelector("#game-total");
+const gameList = document.querySelector("#game-list");
+const gameForm = document.querySelector("#game-form");
+
+if (!collection) {
+    collectionTitle.textContent = "Collection not found";
+    collectionDescription.textContent =
+        "The requested game collection could not be found.";
+    gameTotal.textContent = "0 games";
+    gameList.innerHTML = `
+        <p class="empty-message">
+            This collection does not exist.
+        </p>
+    `;
+} else {
+    collectionTitle.textContent = collection.title;
+    collectionDescription.textContent = collection.description;
+
+    displayGames();
+}
+
+function getGames() {
+    return gamesByCollection[collectionId] || [];
+}
+
+function saveGames(games) {
+    gamesByCollection[collectionId] = games;
+    localStorage.setItem(gameStorageKey, JSON.stringify(gamesByCollection));
+}
 
 function displayGames() {
-    const gameList = document.querySelector("#game-list");
-    const gameTotal = document.querySelector("#game-total");
+    const games = getGames();
 
     gameTotal.textContent =
         `${games.length} game${games.length === 1 ? "" : "s"}`;
@@ -32,7 +58,7 @@ function displayGames() {
     if (games.length === 0) {
         gameList.innerHTML = `
             <p class="empty-message">
-                This collection does not contain any games yet.
+                No games have been added to this collection yet.
             </p>
         `;
 
@@ -42,104 +68,46 @@ function displayGames() {
     gameList.innerHTML = games
         .map((game) => {
             return `
-                <article class="game-item-card">
-                    <div class="game-item-content">
-                        <p class="collection-type">Video game</p>
+                <article class="game-card">
+                    <div class="game-card-content">
+                        <p class="collection-type">${game.genre}</p>
 
                         <h3>${game.title}</h3>
 
-                        <dl class="game-properties">
-                            <div>
-                                <dt>Genre</dt>
-                                <dd>${game.genre}</dd>
-                            </div>
+                        <p>Platform: ${game.platform}</p>
 
-                            <div>
-                                <dt>Platform</dt>
-                                <dd>${game.platform}</dd>
-                            </div>
-
-                            <div>
-                                <dt>Rating</dt>
-                                <dd>${game.rating}/10</dd>
-                            </div>
-                        </dl>
+                        <p>Rating: ${game.rating}/10</p>
                     </div>
 
-                    <div class="game-item-actions">
-                        <button
-                            class="edit-button"
-                            type="button"
-                            data-game-id="${game.id}"
-                        >
-                            Edit
-                        </button>
-
-                        <button
-                            class="delete-button"
-                            type="button"
-                            data-game-id="${game.id}"
-                        >
-                            Delete
-                        </button>
-                    </div>
+                    <button
+                        class="delete-game-button"
+                        type="button"
+                        data-game-id="${game.id}"
+                    >
+                        Delete
+                    </button>
                 </article>
             `;
         })
         .join("");
 
-    addGameActionListeners();
+    addDeleteListeners();
 }
 
-function addGameActionListeners() {
-    const deleteButtons = document.querySelectorAll(".delete-button");
-    const editButtons = document.querySelectorAll(".edit-button");
+function addDeleteListeners() {
+    const deleteButtons = document.querySelectorAll(".delete-game-button");
 
     deleteButtons.forEach((button) => {
         button.addEventListener("click", () => {
             const gameId = Number(button.dataset.gameId);
+            const games = getGames();
 
-            const gameIndex = games.findIndex((game) => {
-                return game.id === gameId;
+            const updatedGames = games.filter((game) => {
+                return game.id !== gameId;
             });
 
-            if (gameIndex !== -1) {
-                games.splice(gameIndex, 1);
-                displayGames();
-            }
-        });
-    });
-
-    editButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            const gameId = Number(button.dataset.gameId);
-
-            const gameToEdit = games.find((game) => {
-                return game.id === gameId;
-            });
-
-            if (!gameToEdit) {
-                return;
-            }
-
-            const newTitle = prompt("Edit game title:", gameToEdit.title);
-            const newGenre = prompt("Edit genre:", gameToEdit.genre);
-            const newPlatform = prompt("Edit platform:", gameToEdit.platform);
-            const newRating = prompt("Edit rating out of 10:", gameToEdit.rating);
-
-            if (
-                newTitle !== null &&
-                newGenre !== null &&
-                newPlatform !== null &&
-                newRating !== null
-            ) {
-                gameToEdit.title = newTitle.trim() || gameToEdit.title;
-                gameToEdit.genre = newGenre.trim() || gameToEdit.genre;
-                gameToEdit.platform = newPlatform.trim() || gameToEdit.platform;
-                gameToEdit.rating = Number(newRating) || gameToEdit.rating;
-
-                displayGames();
-            }
+            saveGames(updatedGames);
+            displayGames();
         });
     });
 }
@@ -147,27 +115,46 @@ function addGameActionListeners() {
 function addGame(event) {
     event.preventDefault();
 
-    const title = document.querySelector("#game-title").value.trim();
-    const genre = document.querySelector("#game-genre").value.trim();
-    const platform = document.querySelector("#game-platform").value.trim();
-    const rating = Number(document.querySelector("#game-rating").value);
-
-    if (title === "" || genre === "" || platform === "" || rating < 1 || rating > 10) {
+    if (!collection) {
         return;
     }
 
+    const gameTitleInput = document.querySelector("#game-title");
+    const gameGenreInput = document.querySelector("#game-genre");
+    const gamePlatformInput = document.querySelector("#game-platform");
+    const gameRatingInput = document.querySelector("#game-rating");
+
+    const gameTitle = gameTitleInput.value.trim();
+    const gameGenre = gameGenreInput.value.trim();
+    const gamePlatform = gamePlatformInput.value.trim();
+    const gameRating = Number(gameRatingInput.value);
+
+    if (
+        gameTitle === "" ||
+        gameGenre === "" ||
+        gamePlatform === "" ||
+        Number.isNaN(gameRating)
+    ) {
+        return;
+    }
+
+    const games = getGames();
+
     games.push({
         id: Date.now(),
-        title: title,
-        genre: genre,
-        platform: platform,
-        rating: rating
+        title: gameTitle,
+        genre: gameGenre,
+        platform: gamePlatform,
+        rating: gameRating
     });
 
-    event.target.reset();
+    saveGames(games);
+
+    gameForm.reset();
+
     displayGames();
 }
 
-document.querySelector("#game-form").addEventListener("submit", addGame);
-
-displayGames();
+if (gameForm) {
+    gameForm.addEventListener("submit", addGame);
+}

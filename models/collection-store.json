@@ -1,0 +1,32 @@
+{
+  "collections": [
+    {
+      "id": "competitive-games",
+      "title": "Competitive Games",
+      "description": "Games focused on online competitive play.",
+      "image": "/images/competitive-games.jpg",
+      "games": [
+        {
+          "title": "Counter-Strike 2",
+          "genre": "First-person shooter",
+          "platform": "PC",
+          "rating": 9
+        }
+      ]
+    },
+    {
+      "id": "racing-games",
+      "title": "Racing Games",
+      "description": "Fast-paced games focused on racing and driving.",
+      "image": "/images/default-collection.jpg",
+      "games": []
+    },
+    {
+      "id": "open-world-games",
+      "title": "Open-World Games",
+      "description": "Large games with worlds to explore.",
+      "image": "/images/default-collection.jpg",
+      "games": []
+    }
+  ]
+}

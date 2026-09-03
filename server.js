@@ -3,20 +3,29 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import hbs from 'hbs';
+
 import routes from './routes.js';
 
 const app = express();
-const port = 3000;
 
-const currentFilePath = fileURLToPath(import.meta.url);
-const currentDirectoryPath = path.dirname(currentFilePath);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// Allows the browser to load CSS, JavaScript, images, and HTML files
-app.use(express.static(currentDirectoryPath));
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
 
-// Connects requests to routes.js
+hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use('/', routes);
 
+const port = process.env.PORT || 3000;
+
 app.listen(port, () => {
-    console.log(`Express app running on port ${port}!`);
+    console.log(`GameVault is running at http://localhost:${port}`);
 });

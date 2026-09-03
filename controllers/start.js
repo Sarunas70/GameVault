@@ -1,16 +1,21 @@
 'use strict';
 
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const currentFilePath = fileURLToPath(import.meta.url);
-const currentDirectoryPath = path.dirname(currentFilePath);
+import logger from '../utils/logger.js';
+import appStore from '../models/app-store.js';
 
 const start = {
-    createView(request, response) {
-        response.sendFile(
-            path.join(currentDirectoryPath, '../index.html')
-        );
+    async createView(request, response) {
+        logger.info('Start page loading!');
+
+        const info = await appStore.getAppInfo();
+
+        const viewData = {
+            title: 'GameVault | Welcome',
+            appTitle: info?.appTitle || 'GameVault',
+            info
+        };
+
+        response.render('start', viewData);
     }
 };
 

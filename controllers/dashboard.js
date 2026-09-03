@@ -1,16 +1,15 @@
 'use strict';
 
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const currentFilePath = fileURLToPath(import.meta.url);
-const currentDirectoryPath = path.dirname(currentFilePath);
+import collectionStore from '../models/collection-store.js';
 
 const dashboard = {
-    createView(request, response) {
-        response.sendFile(
-            path.join(currentDirectoryPath, '../dashboard.html')
-        );
+    async index(request, response) {
+        const collections = await collectionStore.getAllCollections();
+
+        response.render('dashboard', {
+            title: 'Dashboard | GameVault',
+            collections
+        });
     }
 };
 

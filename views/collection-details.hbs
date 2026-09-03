@@ -1,0 +1,59 @@
+{{> menu id="dashboard"}}
+<link rel="stylesheet" href="/style.css">
+<main class="details-page">
+    {{#if collection}}
+        {{#with collection}}
+            <section class="details-header">
+                <a class="back-link" href="/dashboard">
+                    ← Back to dashboard
+                </a>
+
+                <p class="section-label">Collection details</p>
+
+                <h1>{{title}}</h1>
+
+                <p>{{description}}</p>
+            </section>
+
+            <section class="items-section">
+                <div class="items-heading">
+                    <div>
+                        <p class="section-label">Games in collection</p>
+
+                        <h2>Your games</h2>
+                    </div>
+
+                    <p class="collection-total">
+                        {{games.length}} games
+                    </p>
+                </div>
+
+                {{> listgames}}
+            </section>
+
+            <section class="add-game-section">
+                <p class="section-label">Add a game</p>
+
+                <h2>Add a game to {{title}}</h2>
+
+                {{> addgame}}
+            </section>
+        {{/with}}
+    {{else}}
+        <section class="details-header">
+            <a class="back-link" href="/dashboard">
+                ← Back to dashboard
+            </a>
+
+            <h1>Collection not found</h1>
+
+            <p>
+                The collection you requested does not exist or may have been deleted.
+            </p>
+        </section>
+    {{/if}}
+</main>
+
+<footer class="site-footer">
+    <p>&copy; 2026 GameVault. Created for an academic assignment.</p>
+</footer>
